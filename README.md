@@ -1,10 +1,14 @@
-# if the the git command (git add .) not work 
+# If the the git command (git add .) not work 
 
-please use this git command  (git config --global core.autocrlf input ) this commend will fix that problem
+please use this git command  
+
+* git config --global core.autocrlf input 
+
+this command will fix that problem
 
 
 
-## Getting Started with Create React App
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
