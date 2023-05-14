@@ -1,4 +1,4 @@
-# If the the git command (git add .) not work 
+# If the git command (git add .) not working ? 
 
 please use this git command  
 
