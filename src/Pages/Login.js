@@ -121,98 +121,81 @@ function Login() {
     }
   };
 
-  // This function returns the Login component
+  // This function returns the Login component.
 
-// This function returns the Login component.
-return (
-    <div className="bg-secondary d-flex justify-content-center align-items-center vh-100" >
-      <div style={{ width: 30 + "rem" }} className='card p-3 rounded-5 shadow-lg'>
+  return <div className="bg-secondary d-flex justify-content-center align-items-center vh-100" >
+        <div style={{ width: 30 + "rem" }} className='card p-3 rounded-5 shadow-lg'>
 
-        <h4 className="text-dark">{ShowSignup ? 'Signup' : 'Login'}</h4>
+            <h4 className="text-dark">{ShowSignup ? 'Signup' : 'Login'}</h4>
 
-        <form onSubmit={ShowSignup ? onSignUp : onLogin}>
-          // This input group contains the user ID input field.
-          <div className="input-group">
-            <input className="form-control m-1" type="text" value={userId} id="userId" onChange={updateSignData} placeholder="UserId" />
-          </div>
+            <form onSubmit={ShowSignup ? onSignUp : onLogin}>
+                <div className="input-group">
+                    <input className="form-control m-1" type="text" value={userId} id="userId" onChange={updateSignData} placeholder="UserId" />
+                </div>
 
-          {/* This code enables the following input groups when ShowSignup is true. */}
-          {
-            ShowSignup &&
-            <>
-              // This input group contains the username input field.
-              <div className='input-group'>
-                <input className="form-control m-1" type="text" value={userName} id="userName" onChange={updateSignData} placeholder="Username" />
+                {/* enables when ShowSignup is true*/}
+                {
+                    ShowSignup &&
+                    <>
+                        <div className='input-group'>
+                            <input className="form-control m-1" type="text" value={userName} id="userName" onChange={updateSignData} placeholder="Username" />
 
-              </div>
+                        </div>
+                        <div className='input-group'>
+                            <input className="form-control m-1" value={userEmail} id="email" onChange={updateSignData} type="email" placeholder="email" />
 
-              // This input group contains the email input field.
-              <div className='input-group'>
-                <input className="form-control m-1" value={userEmail} id="email" onChange={updateSignData} type="email" placeholder="email" />
+                        </div>
+                    </>
+                }
 
-              </div>
-            </>
-          }
+                <div className="input-group">
+                    <input className="form-control m-1" value={password} id="password" onChange={updateSignData} type="password" placeholder="Password" />
+                </div>
 
-          // This input group contains the password input field.
-          <div className="input-group">
-            <input className="form-control m-1" value={password} id="password" onChange={updateSignData} type="password" placeholder="Password" />
-          </div>
 
-          {/* This code enables the following dropdown button when ShowSignup is true. */}
-          {
-            ShowSignup &&
-            <DropdownButton
-              title={userType}
-              id="userType"
-              variant="light"
-              align="end"
-            >
+                {/* this enables when ShowSignup is true*/}
 
-              <Dropdown.Item eventKey="CUSTOMER" > CUSTOMER </Dropdown.Item>
-              <Dropdown.Item eventKey="ENGINEER" > ENGINEER </Dropdown.Item>
+                {
+                    ShowSignup &&
+                    <DropdownButton
+                        title={userType}
+                        id="userType"
+                        variant="light"
+                        align="end"
+                    >
 
-            </DropdownButton>
+                        <Dropdown.Item eventKey="CUSTOMER" > CUSTOMER </Dropdown.Item>
+                        <Dropdown.Item eventKey="ENGINEER" > ENGINEER </Dropdown.Item>
 
-          }
+                    </DropdownButton>
 
-          {/* This code enables the following input group when ShowSignup is true. */}
-          {
-            ShowSignup &&
-            <div className="input-group">
-              // This input group contains the submit button.
-              <input className="btn btn-danger form-control text-white m-1 cursor-pointer" type="submit"
-                  value={ShowSignup ? "Sign Up" : "Log In"} />
-            </div>
-          }
+                }
 
-          {/* This code enables the following text when ShowSignup is true. */}
-          {
-            ShowSignup &&
-            <div className="text-dark m-1" onClick={toggleSignup} >
-              // This text says "Already have an account ? LogIn".
-              "Already have an account ? LogIn"
-            </div>
-          }
 
-          {/* This code enables the following text when ShowSignup is false. */}
-          {
-            !ShowSignup &&
-            <div className="text-dark m-1" onClick={toggleSignup} >
-              // This text says "Don't have an account ? Sign Up".
-              "Don't have an account ? Sign Up"
-            </div>
-          }
+                {/* enables when ShowSignup is true*/}
 
-          {/* This code displays the message to the user. */}
-          <div className={error ? "text-danger" : "text-success"}> {message} </div>
+                <div className="input-group">
+                    <input className="btn btn-danger form-control text-white m-1 cursor-pointer" type="submit"
+                        value={ShowSignup ? "Sign Up" : "Log In"} />
+                </div>
 
-        </form>
 
-      </div>
+                <div className="text-dark m-1" onClick={toggleSignup} >
+                    {
+                        ShowSignup ? "Already have an account ? LogIn"
+                            : "Don't have an account ? Sign Up"
+                    }
+                </div>
+
+                <div className={error ? "text-danger" : "text-success"}> {message} </div>
+
+            </form>
+
+
+        </div>
+
 
     </div>
-  );
 }
 
-export default Login
+export default Login
