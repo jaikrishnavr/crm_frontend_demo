@@ -34,11 +34,20 @@ function Login() {
     setPassword("");
     setUserName("");
     setUserEmail("");
+    setError(false);
     setMessage("");
   };
 
   // This function signs up the user.
   const onSignUp = (e) => {
+    const data = {
+      name: userName,
+      userId: userId,
+      email: userEmail,
+      userType: userType,
+      password: password,
+    };
+
     e.preventDefault();
 
     // Validate the user input.
@@ -53,7 +62,8 @@ function Login() {
     }
 
     // Make an API call to sign up the user.
-    userSignUp({
+
+    /*  userSignUp({
       name: userName,
       userId: userId,
       email: userEmail,
@@ -73,11 +83,27 @@ function Login() {
           setError(true);
           setMessage("Something went wrong. Please try again later.");
         }
+      });*/
+
+    userSignUp(data)
+      .then((res) => {
+        console.log(res);
+        setError(false);
+        setMessage("SignUp successful");
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          setError(true);
+          setMessage(err.response.data.message);
+        } else {
+          setError(true);
+          setMessage("Something went wrong. Please try again later.");
+        }
       });
   };
 
   // This function logs in the user.
-  const onLogin = (e) => {
+  /*const onLogin = (e) => {
     e.preventDefault();
 
     // Make an API call to log in the user.
@@ -94,6 +120,27 @@ function Login() {
         if (err.response.status) {
           setError(true);
           setMessage(err.response.data.message);
+        }
+      });*/
+
+  const onLogin = (e) => {
+    const data = { userId, password };
+    e.preventDefault();
+
+    userSignIn(data)
+      .then((res) => {
+        console.log(res);
+        setError(false);
+        setMessage("Login Successful");
+
+      })
+      .catch((err) => {
+        if (err.response.status) {
+          setError(true);
+          setMessage(err.response.data.message);
+        } else {
+          setError(true);
+          setMessage("Something went wrong. Please try again later.");
         }
       });
   };
@@ -204,7 +251,6 @@ function Login() {
           <div className={error ? "text-danger" : "text-success"}>
             {message}
           </div>
-          
         </form>
       </div>
     </div>
