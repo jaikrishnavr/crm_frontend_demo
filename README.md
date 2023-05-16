@@ -7,6 +7,16 @@ please use this git command
 this command will fix that problem
 
 
+# to config (.env)
+* add .env in root folder
+* add base url in it 
+eg:
+ REACT_APP_CRM_BACKEND_URL = http://localhost:8000
+
+* after that in auth.js
+
+const BASE_URL= process.env.REACT_APP_CRM_BACKEND_URL; 
+
 
 # Getting Started with Create React App
 
