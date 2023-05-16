@@ -15,7 +15,11 @@ eg:
 
 * after that in auth.js
 
-const BASE_URL= process.env.REACT_APP_CRM_BACKEND_URL; 
+    const BASE_URL= process.env.REACT_APP_CRM_BACKEND_URL; 
+
+* at last install 
+
+     npm install dotenv --save  
 
 
 # Getting Started with Create React App
