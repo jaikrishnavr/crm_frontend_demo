@@ -202,8 +202,7 @@ function Login() {
           </div>
 
           <div className={error ? "text-danger" : "text-success"}>
-            {" "}
-            {message}{" "}
+            {message}
           </div>
         </form>
       </div>
