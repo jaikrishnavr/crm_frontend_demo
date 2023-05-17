@@ -63,33 +63,14 @@ function Login() {
 
     // Make an API call to sign up the user.
 
-    /*  userSignUp({
-      name: userName,
-      userId: userId,
-      email: userEmail,
-      userType: userType,
-      password: password,
-    })
-      .then((res) => {
-        console.log(res);
-        setError(false);
-        setMessage("SignUp successful");
-      })
-      .catch((err) => {
-        if (err.response.status === 400) {
-          setError(true);
-          setMessage(err.response.data.message);
-        } else {
-          setError(true);
-          setMessage("Something went wrong. Please try again later.");
-        }
-      });*/
+    
 
     userSignUp(data)
       .then((res) => {
         console.log(res);
         setError(false);
         setMessage("SignUp successful");
+        window.location.href = "/"
       })
       .catch((err) => {
         if (err.response.status === 400) {
@@ -103,29 +84,11 @@ function Login() {
   };
 
   // This function logs in the user.
-  /*const onLogin = (e) => {
-    e.preventDefault();
-
-    // Make an API call to log in the user.
-    userSignIn({
-      userId,
-      password,
-    })
-      .then((res) => {
-        console.log(res);
-        setError(false);
-        setMessage("Login Successful");
-      })
-      .catch((err) => {
-        if (err.response.status) {
-          setError(true);
-          setMessage(err.response.data.message);
-        }
-      });*/
-
   const onLogin = (e) => {
     const data = { userId, password };
     e.preventDefault();
+
+     // Make an API call to log in the user. 
 
     userSignIn(data)
       .then((res) => {
