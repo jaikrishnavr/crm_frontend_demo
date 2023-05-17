@@ -107,7 +107,7 @@ function Login() {
 
     userSignIn(data)
       .then((res) => {
-        console.log(res);
+        console.log(res); 
         setError(false);
         setMessage("Login Successful");
 
@@ -118,6 +118,7 @@ function Login() {
         localStorage.setItem("token", res.data.accessToken);
         localStorage.setItem("userType", res.data.userType);
 
+        
         if (res.data.userType === "ENGINEER") {
           window.location.href = "/engineer";
         } else if (res.data.userType === "CUSTOMER") {
