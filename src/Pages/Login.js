@@ -3,6 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { userSignIn, userSignUp } from "../api/auth";
 
+
 // This function defines the Login component.
 function Login() {
   // This state variable stores whether the user is signing up or logging in.
@@ -96,6 +97,17 @@ function Login() {
         setError(false);
         setMessage("Login Successful");
 
+        if(res.data.userType === "ENGINEER") {
+          window.location.href="/engineer";
+        }
+
+        else if(res.data.userType === "CUSTOMER"){
+          window.location.href = "/customer"
+        }
+        else{
+          window.location.href="/admin"
+        }
+
       })
       .catch((err) => {
         if (err.response.status) {
@@ -122,6 +134,10 @@ function Login() {
       setUserName(e.target.value);
     }
   };
+
+  const handleSelect = (e) => {
+setUserType(e);
+  }
 
   // This function returns the Login component.
   return (
@@ -186,6 +202,7 @@ function Login() {
           {ShowSignup && (
             <DropdownButton
               title={userType}
+              onSelect={handleSelect}
               id="userType"
               variant="light"
               align="end"
