@@ -1,8 +1,12 @@
 import React from 'react'
+import Sidebar from '../Components/Sidebar'
 
 function Customer() {
   return (
-    <div>Customer Dashboard</div>
+    <div>
+      <Sidebar/>
+     <h2> Customer Dashboard </h2>
+     </div>
   )
 }
 
