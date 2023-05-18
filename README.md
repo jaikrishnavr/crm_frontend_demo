@@ -21,6 +21,26 @@ eg:
 
      npm install dotenv --save  
 
+# circular progress bar 
+
+   * npm i react-circular-progressbar
+
+
+# coreui
+
+* npm install @coreui/react
+
+* npm install @coreui/coreui
+
+
+# bootstrap
+ 
+ * npm install bootstrap
+
+ * npm i bootstrap-icons
+
+
+
 
 # Getting Started with Create React App
 
