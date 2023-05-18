@@ -23,6 +23,8 @@ function Login() {
   const [error, setError] = useState(false);
   // This function toggles between the sign up and log in forms.
 
+  // Check user type and token stored in localStorage
+  // Redirect user based on userType: ENGINEER, CUSTOMER, or ADMIN
   useEffect(() => {
     const userType = localStorage.getItem("userType");
     const token = localStorage.getItem("token");
@@ -40,6 +42,7 @@ function Login() {
     }
   }, []);
 
+  // Toggle signup form visibility and clear state
   const toggleSignup = () => {
     setShowSignup(!ShowSignup);
     clearState();
@@ -107,18 +110,18 @@ function Login() {
 
     userSignIn(data)
       .then((res) => {
-        console.log(res); 
+        console.log(res);
         setError(false);
         setMessage("Login Successful");
 
-        localStorage.setItem("name", res.data.name);
-        localStorage.setItem("userId", res.data.userId);
-        localStorage.setItem("email", res.data.email);
-        localStorage.setItem("userStatus", res.data.userStatus);
-        localStorage.setItem("token", res.data.accessToken);
-        localStorage.setItem("userType", res.data.userType);
+        // Store user data in localStorage for future use
+        localStorage.setItem("name", res.data.name); // Store user's name
+        localStorage.setItem("userId", res.data.userId); // Store user's ID
+        localStorage.setItem("email", res.data.email); // Store user's email
+        localStorage.setItem("userStatus", res.data.userStatus); // Store user's status
+        localStorage.setItem("token", res.data.accessToken); // Store access token
+        localStorage.setItem("userType", res.data.userType); // Store user's type
 
-        
         if (res.data.userType === "ENGINEER") {
           window.location.href = "/engineer";
         } else if (res.data.userType === "CUSTOMER") {
@@ -127,7 +130,7 @@ function Login() {
           window.location.href = "/admin";
         }
       })
-      
+
       .catch((err) => {
         if (err.response.status) {
           setError(true);
@@ -165,7 +168,7 @@ function Login() {
         style={{ width: 30 + "rem" }}
         className="card p-3 rounded-5 shadow-lg"
       >
-        <h4 className="text-dark">{ShowSignup ? "Signup" : "Login"}</h4>
+        <h4 className={ShowSignup ? "text-secondary" : "text-danger" }>{ShowSignup ? "Signup" : "Login"}</h4>
 
         <form onSubmit={ShowSignup ? onSignUp : onLogin}>
           <div className="input-group">
@@ -235,7 +238,7 @@ function Login() {
 
           <div className="input-group">
             <input
-              className="btn btn-danger form-control text-white m-1 cursor-pointer"
+              className={ShowSignup ? "bg-dark form-control text-white m-1 cursor-pointer" : "bg-danger form-control text-white m-1 cursor-pointer " }
               type="submit"
               value={ShowSignup ? "Sign Up" : "Log In"}
             />
