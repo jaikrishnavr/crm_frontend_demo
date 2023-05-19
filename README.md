@@ -25,15 +25,25 @@ eg:
 
    * npm install --save react-circular-progressbar
 
+# material table
 
+    * npm install material-table --legacy-peer-deps
+    * npm install @material-ui/icons --force
+    *   npm i @mui/material @emotion/react @emotion/styled --legacy-peer-deps
+    * npm i @mui --legacy-peer-deps
+    * npm i @mui/icons-material --legacy-peer-deps
+
+
+
+    
 # coreui
 
 * npm install @coreui/react
 
 * npm install @coreui/coreui
+   
 
-
-# bootstrap
+ # bootstrap
  
  * npm install bootstrap
 

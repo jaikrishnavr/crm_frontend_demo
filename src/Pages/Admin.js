@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import {getAllTickets } from "../api/ticket";
+import { getAllTickets } from "../api/ticket";
+import MaterialTable from 'material-table'
+import { getAllUsers } from "../api/user";
 
 function Admin() {
   const userName = localStorage.getItem("name");
@@ -9,8 +11,11 @@ function Admin() {
   const [ticketDetails,setTicketDetails] = useState([]);
     const [ticketStatusCount, setTicketStatusCount] = useState({});
 
+    const [userDetails,setUserDetails]=useState([]);
+
   useEffect(()=>{
     fetchTickets();
+    fetchUsers();
   },[])
 
   const fetchTickets = () => {
@@ -26,6 +31,18 @@ function Admin() {
       console.log(err);
     })
   }
+
+  const fetchUsers=()=>{
+
+    getAllUsers()
+    .then(res=>{
+       setUserDetails(res.data);
+       console.log(res.data);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
 
   const updateTicketsCount=(tickets)=>{
 
@@ -58,7 +75,7 @@ function Admin() {
         <Sidebar />
       </div>
 
-      <div className="col vh-100 m-4">
+      <div className="col my-4">
         <div className="container">
           <h3 className="text-primary text-center">Welcome, {userName} </h3>
           <p className="text-center text-muted">
@@ -151,6 +168,62 @@ function Admin() {
             </div>
             
           </div>
+
+          <br/>            
+
+            <div style={{  maxWidth: '100%' }}>
+        <MaterialTable
+          columns={[
+            { title: 'USER ID', field: 'userId' },
+            { title: 'NAME', field: 'name' },
+            { title: 'EMAIL', field: 'email' },
+            { title: 'ROLE', field: 'userTypes' },
+            { title: 'STATUS', field: 'userStatus' },
+          ]}
+
+          data={userDetails}
+
+          title="USER RECORDS"
+
+          options={{
+
+            sorting:true,
+            rowStyle:{
+            }
+          }}      
+        />
+
+      </div>
+
+      <hr/>
+
+             <div style={{ maxWidth: '100%' }}>
+        <MaterialTable
+          columns={[
+            { title: 'TICKET ID', field: '_id' },
+            { title: 'TITLE', field: 'title' },
+            { title: 'DESCRIPTION', field: 'description' },
+            { title: 'REQUESTOR', field: 'requestor' },
+            { title: 'PRIORITY', field: 'ticketPriority' },
+            { title: 'ASSIGNEE', field: 'assignee' },
+            { title: 'STATUS', field: 'status' },
+
+          ]}
+          data={ticketDetails}
+
+          title="TICKET RECORDS"
+
+          options={{
+            sorting:true,
+            rowStyle:{
+            }
+          }}      
+        />
+
+      </div>
+
+
+
         </div>
       </div>
     </div>
