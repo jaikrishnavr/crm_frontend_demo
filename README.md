@@ -23,7 +23,7 @@ eg:
 
 # circular progress bar 
 
-   * npm i react-circular-progressbar
+   * npm install --save react-circular-progressbar
 
 
 # coreui
