@@ -4,6 +4,8 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { getAllTickets } from "../api/ticket";
 import MaterialTable from 'material-table'
 import { getAllUsers } from "../api/user";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Icon } from '@material-ui/core';
+
 
 function Admin() {
   const userName = localStorage.getItem("name");
@@ -191,13 +193,24 @@ function Admin() {
             rowStyle:{
             }
           }}      
+          icons={{
+            Filter: () => <Icon className="bi bi-filter" />,
+            Search: () => <Icon className="bi bi-search" />,
+            Clear: () => <Icon className="bi bi-x-circle" />,
+            FirstPage: () => <Icon className="bi bi-chevron-double-left" />,
+            LastPage: () => <Icon className="bi bi-chevron-double-right" />,
+            NextPage: () => <Icon className="bi bi-chevron-right" />,
+            PreviousPage: () => <Icon className="bi bi-chevron-left" />,
+            ResetSearch: () => <Icon className="bi bi-x-circle-fill" />,
+            SortArrow: () => <Icon className="bi bi-caret-down-fill" />,
+          }}
         />
 
       </div>
 
       <hr/>
 
-             <div style={{ maxWidth: '100%' }}>
+            <div style={{ maxWidth: '100%' }}>
         <MaterialTable
           columns={[
             { title: 'TICKET ID', field: '_id' },
@@ -218,9 +231,24 @@ function Admin() {
             rowStyle:{
             }
           }}      
+
+          icons={{
+            Filter: () => <Icon className="bi bi-filter" />,
+            Search: () => <Icon className="bi bi-search" />,
+            Clear: () => <Icon className="bi bi-x-circle" />,
+            FirstPage: () => <Icon className="bi bi-chevron-double-left" />,
+            LastPage: () => <Icon className="bi bi-chevron-double-right" />,
+            NextPage: () => <Icon className="bi bi-chevron-right" />,
+            PreviousPage: () => <Icon className="bi bi-chevron-left" />,
+            ResetSearch: () => <Icon className="bi bi-x-circle-fill" />,
+            SortArrow: () => <Icon className="bi bi-caret-down-fill" />,
+          }} 
         />
 
-      </div>
+        </div>
+
+
+
 
 
 
