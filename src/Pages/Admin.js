@@ -194,16 +194,17 @@ function Admin() {
             }
           }}      
           icons={{
-            Filter: () => <Icon className="bi bi-filter" />,
-            Search: () => <Icon className="bi bi-search" />,
-            Clear: () => <Icon className="bi bi-x-circle" />,
-            FirstPage: () => <Icon className="bi bi-chevron-double-left" />,
-            LastPage: () => <Icon className="bi bi-chevron-double-right" />,
-            NextPage: () => <Icon className="bi bi-chevron-right" />,
-            PreviousPage: () => <Icon className="bi bi-chevron-left" />,
-            ResetSearch: () => <Icon className="bi bi-x-circle-fill" />,
-            SortArrow: () => <Icon className="bi bi-caret-down-fill" />,
+            Filter: () => <Icon className="bi bi-filter" style={{ color: 'blue', fontSize: '20px' }} />,
+            Search: () => <Icon className="bi bi-search" style={{ color: 'green', fontSize: '18px' }} />,
+            Clear: () => <Icon className="bi bi-x-circle" style={{ color: 'red', fontSize: '16px' }} />,
+            FirstPage: () => <Icon className="bi bi-chevron-double-left" style={{ color: 'orange', fontSize: '20px' }} />,
+            LastPage: () => <Icon className="bi bi-chevron-double-right" style={{ color: 'orange', fontSize: '20px' }} />,
+            NextPage: () => <Icon className="bi bi-chevron-right" style={{ color: 'black', fontSize: '18px' }} />,
+            PreviousPage: () => <Icon className="bi bi-chevron-left" style={{ color: 'black', fontSize: '18px' }} />,
+            ResetSearch: () => <Icon className="bi bi-x-circle-fill" style={{ color: 'gray' }} />,
+            SortArrow: () => <Icon className="bi bi-caret-down-fill" style={{ color: 'brown', fontSize: '16px' }} />,
           }}
+          
         />
 
       </div>
@@ -233,16 +234,16 @@ function Admin() {
           }}      
 
           icons={{
-            Filter: () => <Icon className="bi bi-filter" />,
-            Search: () => <Icon className="bi bi-search" />,
-            Clear: () => <Icon className="bi bi-x-circle" />,
-            FirstPage: () => <Icon className="bi bi-chevron-double-left" />,
-            LastPage: () => <Icon className="bi bi-chevron-double-right" />,
-            NextPage: () => <Icon className="bi bi-chevron-right" />,
-            PreviousPage: () => <Icon className="bi bi-chevron-left" />,
-            ResetSearch: () => <Icon className="bi bi-x-circle-fill" />,
-            SortArrow: () => <Icon className="bi bi-caret-down-fill" />,
-          }} 
+            Filter: () => <Icon className="bi bi-filter" style={{ color: 'blue', fontSize: '20px' }} />,
+            Search: () => <Icon className="bi bi-search" style={{ color: 'green', fontSize: '18px' }} />,
+            Clear: () => <Icon className="bi bi-x-circle" style={{ color: 'red', fontSize: '16px' }} />,
+            FirstPage: () => <Icon className="bi bi-chevron-double-left" style={{ color: 'orange', fontSize: '20px' }} />,
+            LastPage: () => <Icon className="bi bi-chevron-double-right" style={{ color: 'orange', fontSize: '20px' }} />,
+            NextPage: () => <Icon className="bi bi-chevron-right" style={{ color: 'black', fontSize: '18px' }} />,
+            PreviousPage: () => <Icon className="bi bi-chevron-left" style={{ color: 'black', fontSize: '18px' }} />,
+            ResetSearch: () => <Icon className="bi bi-x-circle-fill" style={{ color: 'gray' }} />,
+            SortArrow: () => <Icon className="bi bi-caret-down-fill" style={{ color: 'brown', fontSize: '16px' }} />,
+          }}
         />
 
         </div>
