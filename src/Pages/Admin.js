@@ -4,6 +4,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { getAllTickets } from "../api/ticket";
 import MaterialTable from 'material-table'
 import { getAllUsers } from "../api/user";
+import {Modal, Button} from "react-bootstrap";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Icon } from '@material-ui/core';
 
 
@@ -14,6 +15,8 @@ function Admin() {
     const [ticketStatusCount, setTicketStatusCount] = useState({});
 
     const [userDetails,setUserDetails]=useState([]);
+    const [selectedCurrTicket, setSelectedCurrTicket] = useState({});
+    const [ticketUpdateModal, setTicketUpdateModal] = useState(false);
 
   useEffect(()=>{
     fetchTickets();
@@ -70,6 +73,16 @@ function Admin() {
 
 
     setTicketStatusCount({...data});
+}
+
+const editTicket = (ticketDetails) => {
+  console.log(ticketDetails);
+  setTicketUpdateModal(true);
+  setSelectedCurrTicket(ticketDetails);
+}
+
+const closeTicketUpdateModal = () => {
+  setTicketUpdateModal(false);
 }
   return (
     <div className="row bg-light">
@@ -175,6 +188,7 @@ function Admin() {
 
             <div style={{  maxWidth: '100%' }}>
         <MaterialTable
+         onRowClick={ (event,rowData)=> editTicket(rowData) }
           columns={[
             { title: 'USER ID', field: 'userId' },
             { title: 'NAME', field: 'name' },
@@ -191,6 +205,7 @@ function Admin() {
 
             sorting:true,
             rowStyle:{
+              cursor:"pointer"
             }
           }}      
           icons={{
@@ -213,6 +228,7 @@ function Admin() {
 
             <div style={{ maxWidth: '100%' }}>
         <MaterialTable
+         onRowClick={ (event,rowData)=> editTicket(rowData) }
           columns={[
             { title: 'TICKET ID', field: '_id' },
             { title: 'TITLE', field: 'title' },
@@ -230,6 +246,7 @@ function Admin() {
           options={{
             sorting:true,
             rowStyle:{
+              cursor:"pointer"
             }
           }}      
 
@@ -245,6 +262,33 @@ function Admin() {
             SortArrow: () => <Icon className="bi bi-caret-down-fill" style={{ color: 'brown', fontSize: '16px' }} />,
           }}
         />
+               <Modal show={ticketUpdateModal} onHide={closeTicketUpdateModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Details</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+
+            <form>
+
+                <div className="p-1">
+                    <h5> TicketId : {selectedCurrTicket._id} </h5>
+                </div>
+
+            </form>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeTicketUpdateModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={()=>{}}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+        
 
         </div>
 
