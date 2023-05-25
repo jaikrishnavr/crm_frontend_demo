@@ -9,3 +9,11 @@ export async function getAllUsers(data){
         }
     });
 }
+
+export async function updateUser(user){
+    return axios.put(`${BASE_URL}/crm/api/v1/users/${user._id}`,user,{
+        headers:{
+            'x-access-token':localStorage.getItem("token")
+        }
+    })
+}

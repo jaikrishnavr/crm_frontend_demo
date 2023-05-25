@@ -110,7 +110,11 @@ function Login() {
 
     userSignIn(data)
       .then((res) => {
-        console.log(res);
+        if(res.data.message){
+          setError(true);
+          setMessage(res.data.message);
+          return;
+      }
         setError(false);
         setMessage("Login Successful");
 
