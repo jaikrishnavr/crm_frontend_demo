@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import {getAllTickets} from "../api/ticket";
+import {getAllTickets, updateTicket} from "../api/ticket";
 import {getAllUsers} from "../api/user";
 import MaterialTable from 'material-table'
 import {Modal, Button} from "react-bootstrap";
+import { Icon } from '@material-ui/core';
 
 function Admin(){
 
@@ -21,7 +22,9 @@ function Admin(){
         fetchTickets();
         fetchUsers();
     },[])
+
     const fetchTickets=()=>{
+
         getAllTickets()
         .then(res=>{
            setTicketDetails(res.data);
@@ -32,7 +35,9 @@ function Admin(){
             console.log(err);
         })
     }
+
         const fetchUsers=()=>{
+
         getAllUsers()
         .then(res=>{
            setUserDetails(res.data);
@@ -42,14 +47,19 @@ function Admin(){
             console.log(err);
         })
     }
+
+
     const updateTicketsCount=(tickets)=>{
+
         const data={
             pending:0,
             closed:0,
             progress:0,
             blocked:0
         }
+
         tickets.forEach(ticket => {
+
             if(ticket.status==="OPEN")
                 data.pending+=1;
             else if(ticket.status==="INPROGRESS")
@@ -59,6 +69,9 @@ function Admin(){
             else
                 data.closed+=1; 
         });
+
+
+
         setTicketStatusCount({...data});
     }
 
@@ -73,6 +86,37 @@ function Admin(){
         setTicketUpdateModal(false);
     }
 
+    const onTicketUpdate=(e)=>{
+        
+      const fieldName= e.target.name;
+
+      if(fieldName==='title')
+        selectedCurrTicket.title = e.target.value
+     else if(fieldName==="description")
+        selectedCurrTicket.description=e.target.value
+    else if(fieldName==="status")
+        selectedCurrTicket.status=e.target.value
+    else if(fieldName==="assignee")
+        selectedCurrTicket.assignee=e.target.value
+    else if(fieldName==="ticketPriority")
+        selectedCurrTicket.ticketPriority=e.target.value
+
+        setSelectedCurrTicket({...selectedCurrTicket});
+    }
+
+    const updateTicketFn = (e)=>{
+        e.preventDefault();
+
+        updateTicket(selectedCurrTicket).then((res)=>{
+            console.log("Ticket update successfully");
+            setTicketUpdateModal(false);
+            fetchTickets();
+        })
+        .catch(err=>{
+            console.log(err.message);
+        })
+    }
+
 
     return (
         <div className="row bg-light" >
@@ -80,12 +124,18 @@ function Admin(){
             <div className="col-1">
             <Sidebar/>
             </div>
+
             <div className="col my-4">
+
                 <div className="container">
+
                     <div>
                         <h3 className="text-primary text-center" > Welcome, {userName} </h3>
                         <p className="text-center text-muted" > Take a quick look at your admin stats below </p>
+
+
                         <div className="row text-center">
+
                             <div className="col-xs-12 col-lg-3 col-md-6 my-1">
                                 <div className="card cardItem shadow  bg-primary text-dark bg-opacity-25 border border-primary">
                                     <div className="card-body">
@@ -107,6 +157,7 @@ function Admin(){
                                     </div>
                                 </div>
                             </div>
+
                               <div className="col-xs-12 col-lg-3 col-md-6 my-1">
                                 <div className="card cardItem shadow  bg-warning text-dark bg-opacity-25 border border-warning">
                                     <div className="card-body">
@@ -128,6 +179,7 @@ function Admin(){
                                     </div>
                                 </div>
                             </div>
+
                              <div className="col-xs-12 col-lg-3 col-md-6 my-1">
                                 <div className="card cardItem shadow  bg-success text-dark bg-opacity-25 border border-success">
                                     <div className="card-body">
@@ -149,6 +201,7 @@ function Admin(){
                                     </div>
                                 </div>
                             </div>
+
                              <div className="col-xs-12 col-lg-3 col-md-6 my-1">
                                 <div className="card cardItem shadow  bg-secondary text-dark bg-opacity-25 border border-secondary">
                                     <div className="card-body">
@@ -170,8 +223,12 @@ function Admin(){
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
+
             <br/>            
+
             <div style={{  maxWidth: '100%' }}>
         <MaterialTable
           columns={[
@@ -181,8 +238,11 @@ function Admin(){
             { title: 'ROLE', field: 'userTypes' },
             { title: 'STATUS', field: 'userStatus' },
           ]}
+
           data={userDetails}
+
           title="USER RECORDS"
+
           options={{
 
             sorting:true,
@@ -190,6 +250,17 @@ function Admin(){
                 cursor:"pointer"
             }
           }}      
+          icons={{
+            Filter: () => <Icon className="bi bi-filter" style={{ color: 'blue', fontSize: '20px' }} />,
+            Search: () => <Icon className="bi bi-search" style={{ color: 'green', fontSize: '18px' }} />,
+            Clear: () => <Icon className="bi bi-x-circle" style={{ color: 'red', fontSize: '16px' }} />,
+            FirstPage: () => <Icon className="bi bi-chevron-double-left" style={{ color: 'orange', fontSize: '20px' }} />,
+            LastPage: () => <Icon className="bi bi-chevron-double-right" style={{ color: 'orange', fontSize: '20px' }} />,
+            NextPage: () => <Icon className="bi bi-chevron-right" style={{ color: 'black', fontSize: '18px' }} />,
+            PreviousPage: () => <Icon className="bi bi-chevron-left" style={{ color: 'black', fontSize: '18px' }} />,
+            ResetSearch: () => <Icon className="bi bi-x-circle-fill" style={{ color: 'gray' }} />,
+            SortArrow: () => <Icon className="bi bi-caret-down-fill" style={{ color: 'brown', fontSize: '16px' }} />,
+          }}
         />
 
 
@@ -212,15 +283,29 @@ function Admin(){
             { title: 'PRIORITY', field: 'ticketPriority' },
             { title: 'ASSIGNEE', field: 'assignee' },
             { title: 'STATUS', field: 'status' },
+
           ]}
           data={ticketDetails}
+
           title="TICKET RECORDS"
+
           options={{
             sorting:true,
             rowStyle:{
                 cursor:"pointer"
             }
           }}      
+          icons={{
+            Filter: () => <Icon className="bi bi-filter" style={{ color: 'blue', fontSize: '20px' }} />,
+            Search: () => <Icon className="bi bi-search" style={{ color: 'green', fontSize: '18px' }} />,
+            Clear: () => <Icon className="bi bi-x-circle" style={{ color: 'red', fontSize: '16px' }} />,
+            FirstPage: () => <Icon className="bi bi-chevron-double-left" style={{ color: 'orange', fontSize: '20px' }} />,
+            LastPage: () => <Icon className="bi bi-chevron-double-right" style={{ color: 'orange', fontSize: '20px' }} />,
+            NextPage: () => <Icon className="bi bi-chevron-right" style={{ color: 'black', fontSize: '18px' }} />,
+            PreviousPage: () => <Icon className="bi bi-chevron-left" style={{ color: 'black', fontSize: '18px' }} />,
+            ResetSearch: () => <Icon className="bi bi-x-circle-fill" style={{ color: 'gray' }} />,
+            SortArrow: () => <Icon className="bi bi-caret-down-fill" style={{ color: 'brown', fontSize: '16px' }} />,
+          }}
         />
 
        <Modal show={ticketUpdateModal} onHide={closeTicketUpdateModal}>
@@ -230,31 +315,63 @@ function Admin(){
 
         <Modal.Body>
 
-            <form>
+            <form onSubmit={updateTicketFn}>
 
                 <div className="p-1">
-                    <h5> TicketId : {selectedCurrTicket._id} </h5>
+                    <h5 className="card-subtitle mb-2 text-primary">
+                     TicketId :<span style={{color:"gray "}}> {selectedCurrTicket._id}</span> 
+                      </h5>
+
+                    <div className="input-group mb-3">
+                        <span className="input-group-text" > Title </span>
+                        <input type="text" name="title" value={selectedCurrTicket.title} onChange={onTicketUpdate} />
+                    </div>
+
+                     <div className="input-group mb-3">
+                        <span className="input-group-text" > Assignee </span>
+                        <input type="text" name="assignee" value={selectedCurrTicket.assignee} onChange={onTicketUpdate} />
+                    </div>
+
+                       <div className="input-group mb-3">
+                        <span className="input-group-text" > Status </span>
+                        <input type="text" name="status" value={selectedCurrTicket.status} onChange={onTicketUpdate} />
+                    </div>
+
+                         <div className="input-group mb-3">
+                        <textarea type="text" className="md-textarea form-control"
+                         name="description" rows="4" value={selectedCurrTicket.description} onChange={onTicketUpdate} />
+                    </div>
+
+                     <div className="input-group mb-3">
+                        <span className="input-group-text" > Priority </span>
+                        <input type="text" name="ticketPriority" value={selectedCurrTicket.ticketPriority} onChange={onTicketUpdate} />
+                    </div>
+
                 </div>
 
+                     <Button variant="secondary" onClick={closeTicketUpdateModal}>
+            Close
+          </Button>
+          <Button type="submit" variant="primary">
+            Update
+          </Button>
             </form>
 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeTicketUpdateModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={()=>{}}>
-            Update
-          </Button>
         </Modal.Footer>
       </Modal>
 
       </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+
+      </div>
+
+       </div>
+
+       </div>
     );
 }
+
 export default Admin;
