@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import {getAllTickets, updateTicket} from "../api/ticket";
-import {getAllUsers} from "../api/user";
+import { getAllTickets, updateTicket } from "../api/ticket";
+import { getAllUsers } from "../api/user";
 import MaterialTable from 'material-table'
-import {Modal, Button} from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import { Icon } from '@material-ui/core';
 
 function Admin(){
@@ -62,7 +62,7 @@ function Admin(){
 
             if(ticket.status==="OPEN")
                 data.pending+=1;
-            else if(ticket.status==="INPROGRESS")
+            else if(ticket.status==="PROGRESS")
                 data.progress+=1;
             else if(ticket.status==="BLOCKED")
                 data.blocked+=1;
