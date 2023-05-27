@@ -18,10 +18,15 @@ function Admin(){
 
     const [userDetails,setUserDetails]=useState([]);
 
+   /* useEffect(()=>{
+        fetchTickets();
+        fetchUsers();
+    },[])*/
+
     useEffect(()=>{
         fetchTickets();
         fetchUsers();
-    },[])
+    })
 
     const fetchTickets=()=>{
 
